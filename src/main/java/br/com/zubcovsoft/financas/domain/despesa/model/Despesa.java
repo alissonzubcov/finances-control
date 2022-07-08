@@ -2,8 +2,7 @@ package br.com.zubcovsoft.financas.domain.despesa.model;
 
 import br.com.zubcovsoft.financas.domain.categoriadespesa.model.CategoriaDespesa;
 import br.com.zubcovsoft.financas.domain.usuario.model.Usuario;
-import lombok.Builder;
-import lombok.Getter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -13,6 +12,8 @@ import java.util.UUID;
 @Getter
 @Entity
 @Builder
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Despesa {
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)

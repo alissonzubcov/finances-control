@@ -1,7 +1,8 @@
 package br.com.zubcovsoft.financas.adapter.in.api;
 
 import br.com.zubcovsoft.financas.domain.despesa.model.Despesa;
-import br.com.zubcovsoft.financas.domain.despesa.repository.DespesaDomainRepository;
+import br.com.zubcovsoft.financas.domain.despesa.projection.DespesaDTO;
+import br.com.zubcovsoft.financas.domain.despesa.service.BuscarDespesaAppService;
 import br.com.zubcovsoft.financas.domain.despesa.usecase.RegistrarDespesaUseCase;
 import br.com.zubcovsoft.financas.domain.despesa.usecase.RegistrarDespesaUseCase.RegistrarDespesa;
 import lombok.RequiredArgsConstructor;
@@ -20,20 +21,20 @@ import static org.springframework.web.servlet.support.ServletUriComponentsBuilde
 @RequiredArgsConstructor
 public class DespesaController {
 
-    private final DespesaDomainRepository despesaDomainRepository;
+    private final BuscarDespesaAppService buscarDespesaAppService;
 
     private final RegistrarDespesaUseCase registrarDespesaUseCase;
 
 
     @GetMapping
-    public ResponseEntity<List<Despesa>> getAll() {
-        return ResponseEntity.ok(despesaDomainRepository.getAll());
+    public ResponseEntity<List<DespesaDTO>> getAll() {
+        return ResponseEntity.ok(buscarDespesaAppService.getAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Despesa> getById(@PathVariable UUID id) {
-        var categoria = despesaDomainRepository.getById(id);
-        return categoria != null ? ResponseEntity.ok(categoria) : ResponseEntity.notFound().build();
+    public ResponseEntity<DespesaDTO> getById(@PathVariable UUID id) {
+        var categoria = buscarDespesaAppService.getById(id);
+        return ResponseEntity.ok(categoria);
     }
 
     @ResponseStatus(HttpStatus.CREATED)
