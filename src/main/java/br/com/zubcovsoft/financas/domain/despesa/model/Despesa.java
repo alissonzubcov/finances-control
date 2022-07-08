@@ -2,6 +2,7 @@ package br.com.zubcovsoft.financas.domain.despesa.model;
 
 import br.com.zubcovsoft.financas.domain.categoriadespesa.model.CategoriaDespesa;
 import br.com.zubcovsoft.financas.domain.usuario.model.Usuario;
+import lombok.Builder;
 import lombok.Getter;
 
 import javax.persistence.*;
@@ -11,9 +12,10 @@ import java.util.UUID;
 
 @Getter
 @Entity
+@Builder
 public class Despesa {
 
-    @Id
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
     UUID id;
     BigDecimal valor;
     LocalDateTime data;
@@ -21,8 +23,10 @@ public class Despesa {
     Integer parcela;
 
     @ManyToOne
+            @JoinColumn(name = "categoria_id")
     CategoriaDespesa categoriaDespesa;
 
     @ManyToOne
+    @JoinColumn(name = "usuario_id")
     Usuario usuario;
 }

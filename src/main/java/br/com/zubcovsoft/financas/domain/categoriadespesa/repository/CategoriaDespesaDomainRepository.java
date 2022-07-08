@@ -13,8 +13,9 @@ public interface CategoriaDespesaDomainRepository extends JpaRepository<Categori
         @Query(value = "SELECT * FROM categoria_despesa", nativeQuery = true)
         List<CategoriaDespesa> getAll();
 
-
         @Query(value = "SELECT * FROM categoria_despesa WHERE id = :id", nativeQuery = true)
         CategoriaDespesa getById(UUID id);
+
+
 
 }
