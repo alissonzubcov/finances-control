@@ -5,10 +5,8 @@ import br.com.zubcovsoft.financas.domain.despesa.model.Despesa;
 import br.com.zubcovsoft.financas.domain.despesa.repository.DespesaDomainRepository;
 import br.com.zubcovsoft.financas.domain.despesa.usecase.RegistrarDespesaUseCase;
 import br.com.zubcovsoft.financas.domain.usuario.repository.UsuarioDomainRepository;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -24,6 +22,8 @@ public class RegistrarDespesaAppService implements RegistrarDespesaUseCase {
     private final UsuarioDomainRepository usuarioDomainRepository;
     private final CategoriaDespesaDomainRepository categoriaDespesaDomainRepository;
 
+    private final ApplicationEventPublisher publisher;
+
     @Override
     public UUID handle(RegistrarDespesa cmd) {
         var usuario = usuarioDomainRepository.findById(cmd.getUsuario()).get();
@@ -38,6 +38,9 @@ public class RegistrarDespesaAppService implements RegistrarDespesaUseCase {
                 .data(LocalDateTime.now())
                 .build();
         this.despesaDomainRepository.save(despesa);
+
+        publisher.publishEvent(DespesaRegistrada.from(despesa));
+
         return despesa.getId();
     }
 

@@ -43,6 +43,8 @@ public class DespesaController {
         var despesa = registrarDespesaUseCase.handle(cmd);
 //        URI uri = uriBuilder.path("/despesa/{id}").buildAndExpand(despesa.getId()).toUri();
 //        return ResponseEntity.created(uri).body(despesaSalva);
+
+
         return ResponseEntity.created(fromCurrentRequest().path("/").path(despesa.toString()).build().toUri()).build();
     }
 

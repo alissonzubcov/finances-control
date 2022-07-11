@@ -1,5 +1,6 @@
 package br.com.zubcovsoft.financas.domain.despesa.service;
 
+import br.com.zubcovsoft.financas.domain.despesa.model.DespesaFiltro;
 import br.com.zubcovsoft.financas.domain.despesa.projection.DespesaDTO;
 import br.com.zubcovsoft.financas.domain.despesa.repository.DespesaDomainRepository;
 import lombok.RequiredArgsConstructor;
