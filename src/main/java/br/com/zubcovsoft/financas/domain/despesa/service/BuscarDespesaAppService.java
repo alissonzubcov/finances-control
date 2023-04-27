@@ -1,6 +1,6 @@
 package br.com.zubcovsoft.financas.domain.despesa.service;
 
-import br.com.zubcovsoft.financas.domain.despesa.model.DespesaFiltro;
+import br.com.zubcovsoft.financas.domain.despesa.model.DespesaFilter;
 import br.com.zubcovsoft.financas.domain.despesa.projection.DespesaDTO;
 import br.com.zubcovsoft.financas.domain.despesa.repository.DespesaDomainRepository;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +23,7 @@ public class BuscarDespesaAppService {
         return DespesaDTO.from(despesaDomainRepository.get(id));
     }
 
-    public List<DespesaDTO> getAll(){
+    public List<DespesaDTO> getAll(DespesaFilter despesaFilter){
         return despesaDomainRepository.getAll().stream().map(DespesaDTO::from).collect(Collectors.toList());
     }
 

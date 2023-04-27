@@ -1,6 +1,6 @@
 package br.com.zubcovsoft.financas.domain.despesa.service;
 
-import br.com.zubcovsoft.financas.domain.categoriadespesa.repository.CategoriaDespesaDomainRepository;
+import br.com.zubcovsoft.financas.domain.categoriamovimento.repository.CategoriaMovimentoDomainRepository;
 import br.com.zubcovsoft.financas.domain.despesa.model.Despesa;
 import br.com.zubcovsoft.financas.domain.despesa.repository.DespesaDomainRepository;
 import br.com.zubcovsoft.financas.domain.despesa.usecase.RegistrarDespesaUseCase;
@@ -20,21 +20,22 @@ public class RegistrarDespesaAppService implements RegistrarDespesaUseCase {
 
     private final DespesaDomainRepository despesaDomainRepository;
     private final UsuarioDomainRepository usuarioDomainRepository;
-    private final CategoriaDespesaDomainRepository categoriaDespesaDomainRepository;
+    private final CategoriaMovimentoDomainRepository categoriaMovimentoDomainRepository;
 
     private final ApplicationEventPublisher publisher;
 
     @Override
     public UUID handle(RegistrarDespesa cmd) {
         var usuario = usuarioDomainRepository.findById(cmd.getUsuario()).get();
-        var categoria = categoriaDespesaDomainRepository.findById(cmd.getCategoria()).get();
+        var categoria = categoriaMovimentoDomainRepository.findById(cmd.getCategoria()).get();
 
         var despesa = Despesa.builder()
-                .categoriaDespesa(categoria)
+                .categoriaMovimento(categoria)
                 .usuario(usuario)
                 .parcela(cmd.getParcela())
                 .parcelado(cmd.getParcelado())
                 .valor(cmd.getValor())
+                .nome(cmd.getNome())
                 .data(LocalDateTime.now())
                 .build();
         this.despesaDomainRepository.save(despesa);

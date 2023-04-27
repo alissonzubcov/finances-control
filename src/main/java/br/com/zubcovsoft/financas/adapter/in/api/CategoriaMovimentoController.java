@@ -1,7 +1,7 @@
 package br.com.zubcovsoft.financas.adapter.in.api;
 
-import br.com.zubcovsoft.financas.domain.categoriarenda.model.CategoriaRenda;
-import br.com.zubcovsoft.financas.domain.categoriarenda.repository.CategoriaRendaDomainRepository;
+import br.com.zubcovsoft.financas.domain.categoriamovimento.model.CategoriaMovimento;
+import br.com.zubcovsoft.financas.domain.categoriamovimento.repository.CategoriaMovimentoDomainRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,19 +14,19 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping(path = "api/v1/categoria-renda")
-public class CategoriaRendaController {
+public class CategoriaMovimentoController {
 
     @Autowired
-    private CategoriaRendaDomainRepository categoriaRendaDomainRepository;
+    private CategoriaMovimentoDomainRepository categoriaMovimentoDomainRepository;
 
     @GetMapping
-    public ResponseEntity<List<CategoriaRenda>> getAllCategoriasRenda(){
-        return ResponseEntity.ok( categoriaRendaDomainRepository.getAll());
+    public ResponseEntity<List<CategoriaMovimento>> getAllCategoriasMovimento(){
+        return ResponseEntity.ok( categoriaMovimentoDomainRepository.getAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CategoriaRenda> getCategoriaRendaById(@PathVariable UUID id){
-        var categoria = categoriaRendaDomainRepository.getById(id);
+    public ResponseEntity<CategoriaMovimento> getCategoriaMovimentoById(@PathVariable UUID id){
+        var categoria = categoriaMovimentoDomainRepository.getById(id);
         return categoria != null ? ResponseEntity.ok(categoria) : ResponseEntity.notFound().build();
     }
 

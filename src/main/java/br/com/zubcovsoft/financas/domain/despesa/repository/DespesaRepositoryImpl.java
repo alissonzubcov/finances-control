@@ -1,7 +1,7 @@
 //package br.com.zubcovsoft.financas.domain.despesa.repository;
 //
 //import br.com.zubcovsoft.financas.domain.despesa.model.Despesa;
-//import br.com.zubcovsoft.financas.domain.despesa.model.DespesaFiltro;
+//import br.com.zubcovsoft.financas.domain.despesa.model.DespesaFilter;
 //import lombok.RequiredArgsConstructor;
 //
 //import javax.persistence.EntityManager;
@@ -14,19 +14,19 @@
 //import java.util.ArrayList;
 //import java.util.List;
 //
-//public class DespesaRepositoryImpl implements  DespesaRepositoryQuery {
+//public class DespesaRepositoryImpl implements DespesaRepositoryQuery {
 //
 //    @PersistenceContext
 //    private EntityManager entityManager;
 //    @Override
-//    public List<Despesa> filtrar(DespesaFiltro filtro) {
+//    public List<Despesa> filtrar(DespesaFilter despesaFilter) {
 //        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 //        CriteriaQuery<Despesa> criteria = builder.createQuery(Despesa.class);
 //
 //        Root<Despesa> root = criteria.from(Despesa.class);
 //
 //        //Restrições
-//        Predicate[] predicates = criarRestricoes(filtro, builder, root);
+//        Predicate[] predicates = criarRestricoes(despesaFilter, builder, root);
 //        criteria.where(predicates);
 //
 //
@@ -34,21 +34,21 @@
 //        return query.getResultList();
 //    }
 //
-//    private Predicate[] criarRestricoes(DespesaFiltro filtro, CriteriaBuilder builder, Root<Despesa> root) {
+//    private Predicate[] criarRestricoes(DespesaFilter despesaFilter, CriteriaBuilder builder, Root<Despesa> root) {
 //        List<Predicate> predicates = new ArrayList<>();
-//        if(filtro.getValor() != null){
-//            predicates.add(builder.equal(root.get("valor"), filtro.getValor()));
+//        if(despesaFilter.getValor() != null){
+//            predicates.add(builder.equal(root.get("valor"), despesaFilter.getValor()));
 //        }
 //
-//        if(filtro.getDe() != null){
+//        if(despesaFilter.getDe() != null){
 //            predicates.add(
-//                    builder.greaterThanOrEqualTo(root.get("data"), filtro.getAte())
+//                    builder.greaterThanOrEqualTo(root.get("data"), despesaFilter.getAte())
 //            );
 //        }
 //
-//        if(filtro.getAte() != null){
+//        if(despesaFilter.getAte() != null){
 //            predicates.add(
-//                    builder.lessThanOrEqualTo(root.get("data"), filtro.getAte())
+//                    builder.lessThanOrEqualTo(root.get("data"), despesaFilter.getAte())
 //            );
 //        }
 //

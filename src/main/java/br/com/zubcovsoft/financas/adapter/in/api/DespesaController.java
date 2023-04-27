@@ -1,15 +1,16 @@
 package br.com.zubcovsoft.financas.adapter.in.api;
 
 import br.com.zubcovsoft.financas.domain.despesa.model.Despesa;
+import br.com.zubcovsoft.financas.domain.despesa.model.DespesaFilter;
 import br.com.zubcovsoft.financas.domain.despesa.projection.DespesaDTO;
 import br.com.zubcovsoft.financas.domain.despesa.service.BuscarDespesaAppService;
+import br.com.zubcovsoft.financas.domain.despesa.usecase.DeletarDespesaUseCase;
 import br.com.zubcovsoft.financas.domain.despesa.usecase.RegistrarDespesaUseCase;
 import br.com.zubcovsoft.financas.domain.despesa.usecase.RegistrarDespesaUseCase.RegistrarDespesa;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 import java.util.UUID;
@@ -25,10 +26,12 @@ public class DespesaController {
 
     private final RegistrarDespesaUseCase registrarDespesaUseCase;
 
+    private final DeletarDespesaUseCase deletarDespesaUseCase;
+
 
     @GetMapping
-    public ResponseEntity<List<DespesaDTO>> getAll() {
-        return ResponseEntity.ok(buscarDespesaAppService.getAll());
+    public ResponseEntity<List<DespesaDTO>> getAll(DespesaFilter despesaFilter) {
+        return ResponseEntity.ok(buscarDespesaAppService.getAll(despesaFilter));
     }
 
     @GetMapping("/{id}")
@@ -39,13 +42,14 @@ public class DespesaController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public ResponseEntity<Despesa> create(@RequestBody RegistrarDespesa cmd, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<Despesa> create(@RequestBody RegistrarDespesa cmd) {
         var despesa = registrarDespesaUseCase.handle(cmd);
-//        URI uri = uriBuilder.path("/despesa/{id}").buildAndExpand(despesa.getId()).toUri();
-//        return ResponseEntity.created(uri).body(despesaSalva);
-
-
         return ResponseEntity.created(fromCurrentRequest().path("/").path(despesa.toString()).build().toUri()).build();
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable UUID id){
+        deletarDespesaUseCase.handle(id);
     }
 
 }

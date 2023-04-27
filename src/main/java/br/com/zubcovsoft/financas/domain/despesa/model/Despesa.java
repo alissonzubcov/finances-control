@@ -1,6 +1,6 @@
 package br.com.zubcovsoft.financas.domain.despesa.model;
 
-import br.com.zubcovsoft.financas.domain.categoriadespesa.model.CategoriaDespesa;
+import br.com.zubcovsoft.financas.domain.categoriamovimento.model.CategoriaMovimento;
 import br.com.zubcovsoft.financas.domain.usuario.model.Usuario;
 import lombok.*;
 
@@ -19,13 +19,14 @@ public class Despesa {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     UUID id;
     BigDecimal valor;
+    String nome;
     LocalDateTime data;
     Boolean parcelado;
     Integer parcela;
 
     @ManyToOne
             @JoinColumn(name = "categoria_id")
-    CategoriaDespesa categoriaDespesa;
+    CategoriaMovimento categoriaMovimento;
 
     @ManyToOne
     @JoinColumn(name = "usuario_id")

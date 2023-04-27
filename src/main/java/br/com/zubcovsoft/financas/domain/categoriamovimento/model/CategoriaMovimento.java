@@ -1,4 +1,4 @@
-package br.com.zubcovsoft.financas.domain.categoriadespesa.model;
+package br.com.zubcovsoft.financas.domain.categoriamovimento.model;
 
 import lombok.Getter;
 
@@ -8,7 +8,7 @@ import java.util.UUID;
 
 @Entity
 @Getter
-public class CategoriaDespesa {
+public class CategoriaMovimento {
     @Id
     UUID id;
     String nome;

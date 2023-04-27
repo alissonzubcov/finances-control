@@ -18,6 +18,7 @@ public interface RegistrarDespesaUseCase {
     @Builder
     class RegistrarDespesa{
         UUID categoria;
+        String nome;
         UUID usuario;
         LocalDateTime data;
         BigDecimal valor;
@@ -30,12 +31,14 @@ public interface RegistrarDespesaUseCase {
     class DespesaRegistrada{
         BigDecimal valor;
         Boolean parcelado;
+        String nome;
         Integer parcela;
 
         public static DespesaRegistrada from(Despesa despesa){
             return DespesaRegistrada.builder()
                     .valor(despesa.getValor())
                     .parcela(despesa.getParcela())
+                    .nome(despesa.getNome())
                     .parcelado(despesa.getParcelado()).build();
         }
     }
