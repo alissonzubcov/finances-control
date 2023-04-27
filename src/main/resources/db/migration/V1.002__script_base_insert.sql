@@ -10,6 +10,7 @@ INSERT INTO categoria_movimento (id, nome, descricao, tipo) values('35095723-ce5
 --INSERT INTO categoria_despesa (id, nome, descricao) values('58563a7f-068b-478b-bc5a-9cb048c07094','LAZER','LAZER');
 --INSERT INTO categoria_despesa (id, nome, descricao) values('572855e0-9120-44e7-b7d1-1c341d96b8b7','SAUDE','FARMACIA, MEDICAMENTOS, CONSULTAS');
 --INSERT INTO categoria_despesa (id, nome, descricao) values('2c124e21-9765-46e5-a24d-aaacaaf085bb','EDUCACAO','CURSOS, MATERIAIS ETC');
+
 ----CATEGORIAS RENDA--
 --INSERT INTO categoria_renda (id, nome, descricao) values('2c8d9365-73a0-4c82-aa44-221cae2160d4','ACAO','VENDA ATIVOS, DIVIDENDOS');
 --INSERT INTO categoria_renda (id, nome, descricao) values('35095723-ce56-4806-9e65-7a4288632937','OUTROS','');

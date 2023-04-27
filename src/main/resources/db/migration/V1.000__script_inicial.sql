@@ -36,8 +36,6 @@ CREATE TABLE renda(
     nome VARCHAR(120) NOT NULL,
     valor NUMERIC(15,2) NULL,
     data TIMESTAMP NOT NULL DEFAULT NOW(),
-    parcelado BOOL DEFAULT FALSE,
-    parcela SMALLINT,
     categoria_id UUID NOT NULL,
     usuario_id UUID NOT NULL,
 

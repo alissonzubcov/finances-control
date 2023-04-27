@@ -16,7 +16,8 @@ import java.util.UUID;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Despesa {
 
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     UUID id;
     BigDecimal valor;
     String nome;
@@ -25,7 +26,7 @@ public class Despesa {
     Integer parcela;
 
     @ManyToOne
-            @JoinColumn(name = "categoria_id")
+    @JoinColumn(name = "categoria_id")
     CategoriaMovimento categoriaMovimento;
 
     @ManyToOne

@@ -5,6 +5,8 @@ import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.UUID;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
@@ -15,15 +17,17 @@ public class DespesaDTO {
 
     UUID id;
     BigDecimal valor;
-    LocalDateTime data;
+    ZonedDateTime data;
     Integer parcela;
+    String categoria;
 
     public static DespesaDTO from(Despesa despesa){
         return DespesaDTO.builder()
                 .id(despesa.getId())
                 .valor(despesa.getValor())
-                .data(despesa.getData())
+                .data(ZonedDateTime.of(despesa.getData(), ZoneId.of("UTC")))
                 .parcela(despesa.getParcela())
+                .categoria(despesa.getCategoriaMovimento().getNome())
                 .build();
     }
 
